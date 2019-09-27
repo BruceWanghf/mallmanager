@@ -1,6 +1,6 @@
 # mallmanager
 
-> A Vue.js project
+> A first demo with vue.js for shopping mall
 
 ## Build Setup
 
