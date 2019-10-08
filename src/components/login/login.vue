@@ -52,7 +52,7 @@ export default {
         } = res.data
 
         if(status===200){
-          console.log("--------------"+data.token)
+          
           localStorage.setItem('token',data.token)
 
           this.$router.push({name:'home'})
