@@ -14,7 +14,7 @@
                 </el-col>
                 <el-col :span="2">
                     <div class="grid-content bg-purple">
-                        <a class="logout" href>退出</a>
+                        <a class="logout"  href="#" @click.prevent="handleLogout()">退出</a>
                     </div>
                 </el-col>
             </el-row>
@@ -112,7 +112,24 @@
 
 
 <script>
-export default {};
+export default {
+
+    //组件渲染成功之前判断 是否有token，如果没有token 就路由到login登录页面
+    beforeCreate(){
+        const token = localStorage.getItem('token')
+        if(!token){
+            this.$router.push({name:'login'})
+        }
+    },
+    methods: {
+        handleLogout(){
+            
+            localStorage.clear()
+            this.$message.success('退出成功')
+            this.$router.push({name:'login'})
+        }
+    },
+};
 </script>
 
 <style>
