@@ -20,9 +20,36 @@
             <el-table-column prop="username" label="姓名" width="120"></el-table-column>
             <el-table-column prop="email" label="邮箱"></el-table-column>
             <el-table-column prop="mobile" label="电话"></el-table-column>
-            <el-table-column prop="create_time" label="创建时间"></el-table-column>
-            <el-table-column prop="mg_state" label="用户状态"></el-table-column>
-            <el-table-column prop="" label="操作"></el-table-column>
+
+            <!-- {{cretae_time | fmdate}} -->
+            <!-- 如果单元格内显示的不是字符串（文本），需要给被显示的内容外层包裹一个template -->
+            <el-table-column  label="创建时间">
+                <template slot-scope="scope">
+                    <!-- template 内部要用数据，需要设置slot-scope属性
+                         该属性的值是要使用数据的数据源 此处为userList(scope)
+                         slot-scope的值其实就是el-table绑定的数据userlist
+                         userList(scope).row 是数组中的每个对象-->
+                    {{scope.row.create_time | fmdate}}
+                </template>
+            </el-table-column>
+            <el-table-column  label="用户状态" width="100">
+                <template slot-scope="scope">
+                    <el-switch
+                    v-model="scope.row.mg_state"
+                    active-color="#13ce66"
+                    inactive-color="#ff4949"
+                    >
+                    </el-switch>
+                </template>
+                
+            </el-table-column>
+            <el-table-column prop="" label="操作">
+                <template slot-scope="scope">
+                    <el-button size="mini" plain="true" type="primary" icon="el-icon-edit" circle></el-button>
+                    <el-button size="mini" plain="true" type="danger" icon="el-icon-delete" circle></el-button>
+                    <el-button size="mini" plain="true" type="success" icon="el-icon-check" circle></el-button>
+                </template>
+            </el-table-column>
         </el-table>
     </el-card>
 </template>
@@ -37,7 +64,8 @@ export default {
           //分页相关的数据
           total:-1,
           pagenum:1,
-          pagesize:5
+          pagesize:5,
+
         }
     },
     created(){
