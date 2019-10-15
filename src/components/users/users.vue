@@ -97,7 +97,7 @@
 
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>
-                <el-button type="primary" @click="dialogFormVisibleEdit = false">确 定</el-button>
+                <el-button type="primary" @click="editUser()">确 定</el-button>
             </div>
         </el-dialog>
     </el-card>
@@ -116,6 +116,7 @@ export default {
             dialogFormVisibleEdit:false,
             dialogFormVisibleAdd:false,
             form:{
+
                 username:'',
                 password:'',
                 email:'',
@@ -127,6 +128,18 @@ export default {
         this.getUserList();
     },
     methods: {
+        async editUser(){
+            const res = await this.$http.put(`users/${this.form.id}`,this.form)
+            if(res.data.meta.status===200){
+                this.dialogFormVisibleEdit = false
+                this.getUserList()
+                this.$message.success(res.data.meta.msg)
+            }else{
+                this.$message.warning(res.data.meta.msg)
+            }
+            
+            
+        },
         showEdit(user){
             this.form = user
             this.dialogFormVisibleEdit = true
@@ -172,6 +185,7 @@ export default {
             }
         },
         showAddUser(){
+            this.form = {}
             this.dialogFormVisibleAdd = true
         },
         searchUsers() {
