@@ -123,7 +123,7 @@
 
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisibleRole = false">取 消</el-button>
-                <el-button type="primary" @click="dialogFormVisibleRole = false">确 定</el-button>
+                <el-button type="primary" @click="setRole()">确 定</el-button>
             </div>
         </el-dialog>
     </el-card>
@@ -151,6 +151,7 @@ export default {
             },
             currRoleId:-1,
             value : -1,
+            currUserId:-1,
             currUsername:'',
             roles:[]
         };
@@ -159,8 +160,20 @@ export default {
         this.getUserList();
     },
     methods: {
+        async setRole(){
+            const res = await this.$http.put(`users/${this.currUserId}/role`,{
+                rid:this.currRoleId
+            })
+            if(res.data.meta.status===200){
+                this.dialogFormVisibleRole = false
+                this.$message.success(res.data.meta.msg)
+            }else{
+                this.$message.warning(res.data.meta.msg)
+            }
+        },
         async showRole(user){
             this.currUsername = user.username
+            this.currUserId = user.id
             //获取所有的角色
             const res1 = await this.$http.get(`roles`)
             console.log(res1)
