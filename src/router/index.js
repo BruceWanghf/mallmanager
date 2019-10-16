@@ -5,6 +5,7 @@ import Login from '@/components/login/login.vue'
 import Home from '@/components/home/home.vue'
 import Users from '@/components/users/users.vue'
 import Portal from '@/components/portal/portal.vue'
+import Rights from '@/components/rights/rights.vue'
 
 
 Vue.use(Router)
@@ -30,6 +31,11 @@ export default new Router({
           name: 'portal', 
           path: '/', 
           component: Portal
+        },
+        {
+          name: 'rights', 
+          path: '/rights', 
+          component: Rights
         }
       ]
     }

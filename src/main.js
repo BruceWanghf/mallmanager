@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import Mybread from '@/components/custom/mybread.vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
@@ -20,7 +21,7 @@ Vue.filter('fmdate', (v)=>{
   return moment(v).format('YYYY-MM-DD')
 })
 
-
+Vue.component(Mybread.name,Mybread)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
