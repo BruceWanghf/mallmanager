@@ -5,7 +5,7 @@ import Login from '@/components/login/login.vue'
 import Home from '@/components/home/home.vue'
 import Users from '@/components/users/users.vue'
 import Portal from '@/components/portal/portal.vue'
-import Rights from '@/components/rights/rights.vue'
+import Rights from '@/components/rights/right.vue'
 
 
 Vue.use(Router)
