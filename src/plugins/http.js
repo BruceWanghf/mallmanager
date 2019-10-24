@@ -10,8 +10,10 @@ MyHttpServer.install = (Vue) => {
     // this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN
     axios.interceptors.request.use(function (config) {
         // 在发送请求之前做些什么
-        const AUTH_TOKEN = localStorage.getItem("token")
-        config.headers["Authorization"] = AUTH_TOKEN
+        if(config.url!==`login`){
+            const AUTH_TOKEN = localStorage.getItem("token")
+            config.headers["Authorization"] = AUTH_TOKEN
+        }
         return config;
       }, function (error) {
         // 对请求错误做些什么
