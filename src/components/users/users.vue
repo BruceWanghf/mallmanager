@@ -284,7 +284,7 @@ export default {
             } = res.data;
             if (status === 200) {
                 //1.给表格数据赋值
-                //2.  给total赋值，提示
+                //2.给total赋值，提示
                 this.userList = users;
                 this.total = total;
                 this.$message.success(msg);
