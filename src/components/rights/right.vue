@@ -5,7 +5,24 @@
 </template>
 <script>
 export default {
-    
+    data(){
+        return{
+            rightList:[],
+        }
+    },
+    created(){
+        this.getRightlist()
+    },
+    methods: {
+        async getRightlist(){
+            // const AUTH_TOKEN = localStorage.getItem("token")
+            // this.$http.defaults.headers.common["Authorization"] = AUTH_TOKEN
+            const res = await this.$http.get(`rights/list`)
+            console.log(res)
+            this.rightList = res.data.data
+
+        }
+    },
 }
 </script>
 <style>
