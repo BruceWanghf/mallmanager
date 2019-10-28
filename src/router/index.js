@@ -8,6 +8,7 @@ import Portal from '@/components/portal/portal.vue'
 import Rights from '@/components/rights/right.vue'
 import Role from '@/components/role/role.vue'
 import { Message } from 'element-ui'
+import Goods from '@/components/goods/goodslist.vue'
 
 
 Vue.use(Router)
@@ -43,6 +44,11 @@ const router = new Router({
           name: 'roles',
           path: '/roles',
           component: Role
+        },
+        {
+          name: 'goods',
+          path: '/goods',
+          component: Goods
         }
       ]
     }

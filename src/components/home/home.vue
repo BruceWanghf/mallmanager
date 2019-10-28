@@ -24,7 +24,7 @@
                 <el-menu :unique-opened="true"
                 :router="true"
                 >
-                    <el-submenu :index="item1.order" v-for="(item1,index) in menus" :key="index">
+                    <el-submenu :index='""+item1.order' v-for="(item1,index) in menus" :key="index">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span>{{item1.authName}}</span>
@@ -123,10 +123,10 @@ export default {
     },
     //组件渲染成功之前判断 是否有token，如果没有token 就路由到login登录页面
     beforeCreate(){
-        const token = localStorage.getItem('token')
-        if(!token){
-            this.$router.push({name:'login'})
-        }
+        // const token = localStorage.getItem('token')
+        // if(!token){
+        //     this.$router.push({name:'login'})
+        // }
     },
     created(){
         this.getMenus()
