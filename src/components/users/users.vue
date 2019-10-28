@@ -223,6 +223,11 @@ export default {
                 type: 'success',
                 message: res.data.meta.msg
               })
+          }else{
+              this.$message({
+                type: 'warning',
+                message: res.data.meta.msg
+              })
           }
         }).catch(() => {
           this.$message({

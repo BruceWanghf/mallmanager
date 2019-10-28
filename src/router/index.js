@@ -7,11 +7,12 @@ import Users from '@/components/users/users.vue'
 import Portal from '@/components/portal/portal.vue'
 import Rights from '@/components/rights/right.vue'
 import Role from '@/components/role/role.vue'
+import { Message } from 'element-ui'
 
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       name: 'login',
@@ -23,24 +24,24 @@ export default new Router({
       path: '/',
       component: Home,
       children: [
-        { 
-          name: 'users', 
-          path: 'users', 
+        {
+          name: 'users',
+          path: 'users',
           component: Users
         },
         {
-          name: 'portal', 
-          path: '/', 
+          name: 'portal',
+          path: '/',
           component: Portal
         },
         {
-          name: 'rights', 
-          path: '/rights', 
+          name: 'rights',
+          path: '/rights',
           component: Rights
         },
         {
-          name: 'role', 
-          path: '/role', 
+          name: 'roles',
+          path: '/roles',
           component: Role
         }
       ]
@@ -48,3 +49,18 @@ export default new Router({
 
   ]
 })
+router.beforeEach((to, from, next) => {
+  if (to.path === '/login') {
+    next()
+  } else {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      Message.warning('回到登录页')
+      router.push({ name: 'login' })
+      return
+    }
+    next()
+
+  }
+})
+export default router

@@ -24,19 +24,19 @@
                 <el-menu :unique-opened="true"
                 :router="true"
                 >
-                    <el-submenu index="1">
+                    <el-submenu :index="item1.order" v-for="(item1,index) in menus" :key="index">
                         <template slot="title">
                             <i class="el-icon-location"></i>
-                            <span>用户管理</span>
+                            <span>{{item1.authName}}</span>
                         </template>
                         <template>
-                            <el-menu-item index="/users">
+                            <el-menu-item :index="item2.path" v-for="(item2,index) in item1.children" :key="index">
                                 <i class="el-icon-menu"></i>
-                                <span>用户列表</span>
+                                <span>{{item2.authName}}</span>
                             </el-menu-item>
                         </template>
                     </el-submenu>
-                    <el-submenu index="2">
+                    <!-- <el-submenu index="2">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span>权限管理</span>
@@ -102,7 +102,7 @@
                             </el-menu-item>
                         </template>
                         
-                    </el-submenu>
+                    </el-submenu> -->
                 </el-menu>
             </el-aside>
             <el-main class="main">
@@ -116,6 +116,11 @@
 <script>
 export default {
 
+    data(){
+        return {
+            menus:[]
+        }
+    },
     //组件渲染成功之前判断 是否有token，如果没有token 就路由到login登录页面
     beforeCreate(){
         const token = localStorage.getItem('token')
@@ -123,12 +128,20 @@ export default {
             this.$router.push({name:'login'})
         }
     },
+    created(){
+        this.getMenus()
+    },
     methods: {
         handleLogout(){
             
             localStorage.clear()
             this.$message.success('退出成功')
             this.$router.push({name:'login'})
+        },
+        async getMenus(){
+            const res = await this.$http.get(`menus`)
+            console.log(res)
+            this.menus = res.data.data
         }
     },
 };
