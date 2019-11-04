@@ -10,6 +10,7 @@ import Role from '@/components/role/role.vue'
 import { Message } from 'element-ui'
 import Goods from '@/components/goods/goodslist.vue'
 import GoodsAdd from '@/components/goods/goodsadd.vue'
+import CatParams from '@/components/goods/catparams.vue'
 
 
 Vue.use(Router)
@@ -55,6 +56,11 @@ const router = new Router({
           name: 'goodsadd',
           path: '/goodsadd',
           component: GoodsAdd
+        },
+        {
+          name: 'params',
+          path: '/params',
+          component: CatParams
         }
       ]
     }

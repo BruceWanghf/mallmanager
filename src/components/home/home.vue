@@ -23,7 +23,8 @@
             <el-aside class="aside" width="200px">
                 <el-menu :unique-opened="true"
                 :router="true"
-                >
+                class="menus">
+                <!-- 根据权限获取左侧菜单 -->
                     <el-submenu :index='""+item1.order' v-for="(item1,index) in menus" :key="index">
                         <template slot="title">
                             <i class="el-icon-location"></i>
@@ -140,6 +141,7 @@ export default {
         },
         async getMenus(){
             const res = await this.$http.get(`menus`)
+            console.log('menus')
             console.log(res)
             this.menus = res.data.data
         }
@@ -150,12 +152,14 @@ export default {
 <style>
 .container {
     height: 100%;
+    margin-top: 2px
 }
 .header {
     background-color: #fff;
 }
 .aside {
-    background-color: #d3dce6;
+    background-color: #DFECEC;
+    
 }
 .main {
     background-color: #e9eef3;
@@ -167,5 +171,8 @@ export default {
 .logout {
     line-height: 60px;
     text-decoration: none;
+}
+.menus {
+    background-color: #DFECEC;
 }
 </style>
