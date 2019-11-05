@@ -7,13 +7,16 @@
                         <img src="../../assets/xmlogo.png" alt />
                     </div>
                 </el-col>
-                <el-col :span="18" class="middle">
+                <el-col :span="16" class="middle">
                     <div class="grid-content bg-purple">
                         <H1>雄猫综合运维管理系统</H1>
                     </div>
                 </el-col>
-                <el-col :span="2">
+                <el-col :span="4">
+                    
                     <div class="grid-content bg-purple">
+                        <span>用户名:</span>
+                        <span class="username">{{username}}&nbsp;&nbsp;&nbsp;&nbsp;</span>
                         <a class="logout"  href="#" @click.prevent="handleLogout()">退出</a>
                     </div>
                 </el-col>
@@ -119,7 +122,9 @@ export default {
 
     data(){
         return {
-            menus:[]
+            menus:[],
+            username:''
+            
         }
     },
     //组件渲染成功之前判断 是否有token，如果没有token 就路由到login登录页面
@@ -131,6 +136,7 @@ export default {
     },
     created(){
         this.getMenus()
+        this.username = localStorage.getItem('username')
     },
     methods: {
         handleLogout(){
@@ -144,7 +150,9 @@ export default {
             console.log('menus')
             console.log(res)
             this.menus = res.data.data
-        }
+
+        },
+        
     },
 };
 </script>

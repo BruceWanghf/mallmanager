@@ -205,8 +205,7 @@ export default {
         handleChange() {},
         //获取三级分类的信息
         async getGoodCate() {
-            const res = await this.$http.get("categories?type=3");
-            
+            const res = await this.$http.get("categories?type=3");            
             this.options = res.data.data;
         },
         //点击不同的tab事件

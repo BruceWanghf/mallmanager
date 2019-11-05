@@ -54,8 +54,15 @@ export default {
         if(status===200){
           
           localStorage.setItem('token',data.token)
+          localStorage.setItem('username',this.formData.username)
 
-          this.$router.push({name:'home'})
+          this.$router.push({
+            name:'home',
+            params:{
+              username:this.formData.username
+            }
+
+          })
           this.$message.success(msg)
         }
         else{
